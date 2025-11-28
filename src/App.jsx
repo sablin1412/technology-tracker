@@ -1,97 +1,63 @@
 import { useState } from 'react';
 import './App.css';
+import useTechnologies from './useTechnologies';
 import TechnologyCard from './TechnologyCard';
-
-const initialTechnologies = [
-  {
-    id: 1,
-    title: 'React Components',
-    description: 'Изучение базовых компонентов',
-    status: 'completed'
-  },
-  {
-    id: 2,
-    title: 'JSX Syntax',
-    description: 'Освоение синтаксиса JSX',
-    status: 'not-started'
-  },
-  {
-    id: 3,
-    title: 'State Management',
-    description: 'Работа с состояниями компонентов',
-    status: 'not-started'
-  }
-];
+import TechnologyNotes from './TechnologyNotes';
+import ProgressBar from './ProgressBar';
+import QuickActions from './QuickActions';
 
 function App() {
-  const [techList, setTechList] = useState(initialTechnologies);
-  const [filter, setFilter] = useState('all'); // all | not-started | in-progress | completed
+  const {
+    technologies,
+    updateStatus,
+    updateNotes,
+    progress,
+    setTechnologies
+  } = useTechnologies();
 
-  const total = techList.length;
-  const completedCount = techList.filter(t => t.status === 'completed').length;
-  const notStarted = techList.filter(t => t.status === 'not-started').length;
-  const inProgress = techList.filter(t => t.status === 'in-progress').length;
-  const progressPercent = Math.round((completedCount / total) * 100);
+  // фильтр по статусу и строка поиска
+  const [filter, setFilter] = useState('all');      // all | not-started | in-progress | completed
+  const [searchQuery, setSearchQuery] = useState(''); // поиск по названию и описанию
 
-  // смена статуса по клику по карточке
-  const toggleStatus = (id) => {
-    setTechList(prev =>
-      prev.map(t => {
-        if (t.id !== id) return t;
-
-        let nextStatus;
-        if (t.status === 'not-started') nextStatus = 'in-progress';
-        else if (t.status === 'in-progress') nextStatus = 'completed';
-        else nextStatus = 'not-started';
-
-        return { ...t, status: nextStatus };
-      })
+  const markAllCompleted = () => {
+    setTechnologies((prev) =>
+      prev.map((tech) => ({ ...tech, status: 'completed' }))
     );
   };
 
-  // фильтрация списка
-  const filteredTechs =
+  const resetAllStatuses = () => {
+    setTechnologies((prev) =>
+      prev.map((tech) => ({ ...tech, status: 'not-started' }))
+    );
+  };
+
+  // сначала фильтруем по статусу
+  const filteredByStatus =
     filter === 'all'
-      ? techList
-      : techList.filter(t => t.status === filter);
+      ? technologies
+      : technologies.filter((tech) => tech.status === filter);
+
+  // затем по поиску (название + описание)
+  const filteredTechnologies = filteredByStatus.filter((tech) =>
+    tech.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    tech.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="App">
-      {/* Прогресс */}
       <header className="progress-header-big">
         <h2>Прогресс изучения</h2>
 
-        <div className="stats-row">
-          <div className="stat-card">
-            <span className="stat-label">Всего технологий</span>
-            <span className="stat-value">{total}</span>
-          </div>
-          <div className="stat-card">
-            <span className="stat-label">Изучено</span>
-            <span className="stat-value">{completedCount}</span>
-          </div>
-          <div className="stat-card">
-            <span className="stat-label">Не начато</span>
-            <span className="stat-value">{notStarted}</span>
-          </div>
-          <div className="stat-card">
-            <span className="stat-label">В процессе</span>
-            <span className="stat-value">{inProgress}</span>
-          </div>
-        </div>
+        <ProgressBar
+          progress={progress}
+          label="Общий прогресс"
+          color="#22c55e"
+          height={18}
+          animated={true}
+        />
 
-        <div className="progress-bar">
-          <div
-            className="progress-bar-fill"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-        <div className="progress-bar-text">{progressPercent}% завершено</div>
-      </header>
-
-      {/* Кнопки фильтра */}
-      <section className="quick-actions block">
-        <div className="filters-row">
+        {/* Фильтры по статусу */}
+        <div className="filters-row center-filters">
           <button
             className={filter === 'all' ? 'active' : ''}
             onClick={() => setFilter('all')}
@@ -117,19 +83,49 @@ function App() {
             Завершено
           </button>
         </div>
-      </section>
 
-      {/* Список технологий */}
+        {/* Поиск по технологиям */}
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="Поиск технологий..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <span>Найдено: {filteredTechnologies.length}</span>
+        </div>
+      </header>
+
+      <QuickActions
+        onMarkAllCompleted={markAllCompleted}
+        onResetAll={resetAllStatuses}
+        technologies={technologies}
+      />
+
       <main className="layout">
         <section className="block">
-          {filteredTechs.map(tech => (
-            <TechnologyCard
-              key={tech.id}
-              title={tech.title}
-              description={tech.description}
-              status={tech.status}
-              onStatusChange={() => toggleStatus(tech.id)}
-            />
+          {filteredTechnologies.map((tech) => (
+            <div key={tech.id} className="tech-with-notes">
+              <TechnologyCard
+                title={tech.title}
+                description={tech.description}
+                status={tech.status}
+                onStatusChange={() => {
+                  const nextStatus =
+                    tech.status === 'not-started'
+                      ? 'in-progress'
+                      : tech.status === 'in-progress'
+                      ? 'completed'
+                      : 'not-started';
+                  updateStatus(tech.id, nextStatus);
+                }}
+              />
+              <TechnologyNotes
+                notes={tech.notes}
+                techId={tech.id}
+                onNotesChange={updateNotes}
+              />
+            </div>
           ))}
         </section>
       </main>
