@@ -1,4 +1,5 @@
-import useLocalStorage from './useLocalStorage';
+// src/useTechnologies.js
+import useLocalStorage from './pages/FullTracker/useLocalStorage';
 
 const initialTechnologies = [
   {
@@ -6,7 +7,10 @@ const initialTechnologies = [
     title: 'React Components',
     description: 'Изучение базовых компонентов',
     status: 'not-started',
-    notes: '',
+    notes:
+      'Разобраться с функциональными и классовыми компонентами.\n' +
+      'Настроить передачу пропсов и дефолтные значения.\n' +
+      'Попрактиковаться в разбиении интерфейса на мелкие компоненты.',
     category: 'frontend'
   },
   {
@@ -14,7 +18,10 @@ const initialTechnologies = [
     title: 'JSX Syntax',
     description: 'Освоение синтаксиса JSX',
     status: 'not-started',
-    notes: '',
+    notes:
+      'Повторить правила вставки JS в JSX ({}).\n' +
+      'Запомнить ограничения: один корневой элемент, className, htmlFor и т.п.\n' +
+      'Написать несколько небольших компонентов только на JSX.',
     category: 'frontend'
   },
   {
@@ -22,9 +29,13 @@ const initialTechnologies = [
     title: 'State Management',
     description: 'Работа с состоянием компонентов',
     status: 'not-started',
-    notes: '',
+    notes:
+      'Освоить useState и обновление состояния на основе предыдущего значения.\n' +
+      'Потренироваться поднимать состояние выше по дереву компонентов.\n' +
+      'Решить, где лучше хранить состояние: локально или в общем родителе.',
     category: 'frontend'
   }
+  // добавь сюда остальные технологии по аналогии, если они у тебя есть
 ];
 
 function useTechnologies() {

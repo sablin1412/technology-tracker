@@ -1,7 +1,12 @@
 import { useState } from 'react';
-import Modal from './Modal';
+import Modal from './Modal.jsx';
 
-function QuickActions({ onMarkAllCompleted, onResetAll, technologies }) {
+function QuickActions({
+  onMarkAllCompleted,
+  onResetAll,
+  onRandomNext,
+  technologies
+}) {
   const [showExportModal, setShowExportModal] = useState(false);
   const [exportData, setExportData] = useState('');
 
@@ -28,6 +33,9 @@ function QuickActions({ onMarkAllCompleted, onResetAll, technologies }) {
         <button className="btn btn-info" onClick={handleExport}>
           Экспорт данных
         </button>
+        <button className="btn btn-secondary" onClick={onRandomNext}>
+          Случайный выбор следующей технологии
+        </button>
       </div>
 
       <Modal
@@ -39,9 +47,7 @@ function QuickActions({ onMarkAllCompleted, onResetAll, technologies }) {
         <pre style={{ whiteSpace: 'pre-wrap', fontSize: '12px' }}>
           {exportData}
         </pre>
-        <button onClick={() => setShowExportModal(false)}>
-          Закрыть
-        </button>
+        <button onClick={() => setShowExportModal(false)}>Закрыть</button>
       </Modal>
     </div>
   );

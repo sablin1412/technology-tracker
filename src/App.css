@@ -288,3 +288,119 @@ body {
   margin-top: 10px;
   justify-content: center;
 }
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111827;
+  color: #fff;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  border-radius: 0 0 10px 10px;
+}
+
+.nav-brand h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+.main-content {
+  margin-top: 10px;
+}
+
+.page h2 {
+  margin-top: 0;
+}
+.btn-secondary {
+  background-color: #6b7280;
+}
+:root[data-theme='light'] {
+  --bg-color: #f5f5f7;
+  --text-color: #111827;
+}
+
+:root[data-theme='dark'] {
+  --bg-color: #111827;
+  --text-color: #e5e7eb;
+}
+
+:root[data-theme='auto'] {
+  /* можно сделать как light или через media-query */
+  --bg-color: #f5f5f7;
+  --text-color: #111827;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* по желанию – использовать переменные и в других местах */
+.App {
+  color: var(--text-color);
+}
+:root[data-theme='light'] {
+  --bg-color: #f5f5f7;
+  --text-color: #111827;
+}
+
+:root[data-theme='dark'] {
+  --bg-color: #111827;
+  --text-color: #e5e7eb;
+}
+
+:root[data-theme='auto'] {
+  /* можно сделать как light или доработать через prefers-color-scheme */
+  --bg-color: #f5f5f7;
+  --text-color: #111827;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.notes-section textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 60px;
+  padding: 6px 8px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.notes-footer {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
