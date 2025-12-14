@@ -1,0 +1,266 @@
+.practice25 {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.practice25 h1 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.practice25 section {
+  margin-bottom: 32px;
+  padding: 20px 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.practice25 section h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+/* ---------- Форма планирования ---------- */
+
+.study-plan-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-group .required::after {
+  content: ' *';
+  color: #e11d48;
+}
+
+.study-plan-form input[type='text'],
+.study-plan-form input[type='date'],
+.study-plan-form input[type='url'],
+.study-plan-form select,
+.study-plan-form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d4d4d8;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.study-plan-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.study-plan-form input:focus,
+.study-plan-form select:focus,
+.study-plan-form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+.study-plan-form input.error,
+.study-plan-form textarea.error,
+.study-plan-form select.error {
+  border-color: #e11d48;
+}
+
+.error-message {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #e11d48;
+}
+
+/* ресурсы */
+
+.resource-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.btn-remove {
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-remove:hover {
+  background: #fecaca;
+}
+
+.btn-add-resource {
+  margin-top: 4px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px dashed #4b5563;
+  background: #f9fafb;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-add-resource:hover {
+  background: #e5e7eb;
+}
+
+/* действия формы */
+
+.form-actions {
+  margin-top: 12px;
+}
+
+.btn-primary {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* элемент только для скринридеров */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ---------- Массовое изменение статусов ---------- */
+
+.bulk-status-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bulk-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.bulk-controls select {
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #d4d4d8;
+}
+
+.bulk-controls button {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  background: #10b981;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.bulk-controls button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.bulk-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.bulk-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ---------- Экспорт / импорт данных ---------- */
+
+.data-import-export {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.status-message {
+  min-height: 20px;
+  font-size: 0.9rem;
+  color: #2563eb;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.controls button,
+.file-input-label {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  background: #4b5563;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.controls button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.file-input-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.drop-zone {
+  margin-top: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px dashed #d4d4d8;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4b5563;
+  background: #f9fafb;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.drop-zone.dragging {
+  border-color: #2563eb;
+  background: #e0f2fe;
+}

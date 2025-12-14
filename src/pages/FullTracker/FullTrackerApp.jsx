@@ -7,12 +7,17 @@ import Login from '../../Login.jsx';
 import Settings from '../../Settings.jsx';
 import Statistics from '../../Statistics.jsx';
 
-// практика 24 как отдельная страница
+// практики 24–26
 import Practice24App from '../Practice24/Practice24App.jsx';
+import Practice25App from '../Practice25/Practice25App.jsx';
+import Practice26App from '../Practice26/Practice26App.jsx';
 
 function FullTrackerApp() {
-  // добавили значение 'practice24'
-  const [page, setPage] = useState('home'); // 'home' | 'dashboard' | 'login' | 'settings' | 'stats' | 'practice24'
+  // варианты: 'home' | 'dashboard' | 'login' | 'settings' | 'stats' | 'practice24' | 'practice25' | 'practice26'
+  const [page, setPage] = useState('home');
+
+  const btnClass = (name) =>
+    page === name ? 'nav-btn nav-btn--active' : 'nav-btn';
 
   return (
     <div className="app">
@@ -20,12 +25,51 @@ function FullTrackerApp() {
         <h1>Трекер изучения технологий</h1>
 
         <nav className="sub-nav">
-          <button onClick={() => setPage('home')}>Home</button>
-          <button onClick={() => setPage('dashboard')}>Dashboard</button>
-          <button onClick={() => setPage('login')}>Login</button>
-          <button onClick={() => setPage('settings')}>Settings</button>
-          <button onClick={() => setPage('stats')}>Statistics</button>
-          <button onClick={() => setPage('practice24')}>Практика 24</button>
+          <button className={btnClass('home')} onClick={() => setPage('home')}>
+            Home
+          </button>
+          <button
+            className={btnClass('dashboard')}
+            onClick={() => setPage('dashboard')}
+          >
+            Dashboard
+          </button>
+          <button
+            className={btnClass('login')}
+            onClick={() => setPage('login')}
+          >
+            Login
+          </button>
+          <button
+            className={btnClass('settings')}
+            onClick={() => setPage('settings')}
+          >
+            Settings
+          </button>
+          <button
+            className={btnClass('stats')}
+            onClick={() => setPage('stats')}
+          >
+            Statistics
+          </button>
+          <button
+            className={btnClass('practice24')}
+            onClick={() => setPage('practice24')}
+          >
+            Практика 24
+          </button>
+          <button
+            className={btnClass('practice25')}
+            onClick={() => setPage('practice25')}
+          >
+            Практика 25
+          </button>
+          <button
+            className={btnClass('practice26')}
+            onClick={() => setPage('practice26')}
+          >
+            Практика 26
+          </button>
         </nav>
       </header>
 
@@ -36,6 +80,8 @@ function FullTrackerApp() {
         {page === 'settings' && <Settings />}
         {page === 'stats' && <Statistics />}
         {page === 'practice24' && <Practice24App />}
+        {page === 'practice25' && <Practice25App />}
+        {page === 'practice26' && <Practice26App />}
       </main>
     </div>
   );
